@@ -1,0 +1,119 @@
+# 编译生成的文件
+*.o
+*.ko
+*.mod.c
+*.cmd
+*.a
+*.so
+*.dwo
+*.d
+
+# 编译目录
+*.tmp_versions/
+*.ver
+*.mod
+*.order
+*.symvers
+
+# 日志和调试文件
+*.log
+*.dmesg
+*.patch
+*.orig
+*.rej
+*.bak
+*.swp
+*.swo
+*.swn
+*~
+
+# 内核编译临时文件
+Module.symvers
+modules.order
+modules.builtin
+modules.builtin.modinfo
+modules.builtin.bin
+modules.dep
+modules.dep.bin
+modules.alias
+modules.alias.bin
+modules.softdep
+modules.devname
+
+# 设备树编译生成的文件
+*.dtb
+*.dtbo
+*.dts.tmp
+*.dtsi.tmp
+
+# 生成的 System.map 文件
+System.map
+System.map.*
+vmlinux
+vmlinuz
+bzImage
+Image
+Image.gz
+zImage
+zImage.*
+initramfs*
+initrd*
+
+# 内核编译目录
+arch/*/boot/dts/*.dtb
+arch/*/boot/dts/*.dtbo
+
+# 内核模块安装目录
+/lib/modules/*
+
+# cscope 和 TAGS 相关文件
+cscope.*
+TAGS
+GTAGS
+GPATH
+GRTAGS
+
+# CLANG、LLVM 编译产生的中间文件
+*.ll
+*.bc
+
+# Makefile 生成的中间文件
+*.version
+*.marker
+*.lst
+
+# 编译失败或自动恢复的文件
+*.stackdump
+
+# Kconfig 生成的文件
+.config
+.config.old
+.config.cmd
+.autoconf
+include/config/
+include/generated/
+
+# 编译工具和测试工具生成的文件
+*.gcno
+*.gcda
+*.gch
+*.pyc
+*.pyo
+*.pyd
+
+# CLion、VSCode 等 IDE 生成的文件
+.idea/
+.vscode/
+*.iml
+
+# ccache 缓存
+ccache/
+
+# GDB 相关
+.gdb_history
+.gdbinit
+
+# QEMU 相关
+qemu-*
+*.qcow2
+
