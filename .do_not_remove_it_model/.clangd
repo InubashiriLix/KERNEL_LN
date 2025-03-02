@@ -1,0 +1,12 @@
+CompileFlags:
+  Add:
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/include/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/include/asm-generic/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm/include/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm/include/asm/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/asm/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/generated/asm/"
+    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/"
+    - "-D__KERNEL__"
+    - "-DMODULE"
