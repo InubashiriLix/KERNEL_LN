@@ -15,7 +15,6 @@ static struct gpio_desc *led_pwm, *led_test;
 #define PWM_FREQ 1000
 int pwm_duty = 50;
 #define PWM_DUTY_MAX 100
-uint8_t is_duty = 0;
 u64 period = 1000000000 / PWM_FREQ;
 static ktime_t high_time, low_time, step_time;
 
@@ -31,7 +30,7 @@ static struct hrtimer pwm_timer, pwm_breath_timer;
 u64 start_t;
 
 static enum hrtimer_restart pwm_timer_handler(struct hrtimer *timer) {
-    u64 now_t = jiffies;
+    u64 now_t = ktime_get();
     led_pwm_state = !led_pwm_state;
     gpiod_set_value(led_pwm, led_pwm_state);
     // timer set
@@ -40,8 +39,8 @@ static enum hrtimer_restart pwm_timer_handler(struct hrtimer *timer) {
 }
 
 static enum hrtimer_restart pwm_breath_timer_handler(struct hrtimer *timer) {
-    printk(KERN_INFO "breath timer handler");
-    u64 now_t = jiffies;
+    /* printk(KERN_INFO "breath timer handler"); */
+    u64 now_t = ktime_get();
     if (increasing) {
         pwm_duty += TIMER_BREATH_HELPRE_STEP;
         if (pwm_duty >= PWM_DUTY_MAX) {
@@ -50,7 +49,7 @@ static enum hrtimer_restart pwm_breath_timer_handler(struct hrtimer *timer) {
         }
     } else {
         pwm_duty -= TIMER_BREATH_HELPRE_STEP;
-        if (pwm_duty <= 0) {
+        if (pwm_duty <= TIMER_BREATH_HELPRE_STEP) {
             pwm_duty = 0;
             increasing = 1;
         }
@@ -105,10 +104,10 @@ static int __init hire_timer_module_init(void) {
 
     // set up breathing led timer
     printk(KERN_INFO "setting up the breathing helper timer");
-    step_time = ns_to_ktime(TIMER_BREATH_HELPRE_STEP);
+    step_time = ns_to_ktime(TIMER_BREATH_HELPER_INTERVEL * 1000000);
     hrtimer_init(&pwm_breath_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
-    pwm_timer.function = pwm_breath_timer_handler;
-    hrtimer_start(&pwm_timer, step_time, HRTIMER_MODE_REL);
+    pwm_breath_timer.function = pwm_breath_timer_handler;
+    hrtimer_start(&pwm_breath_timer, step_time, HRTIMER_MODE_REL);
 
     printk(KERN_INFO "all done");
     return 0;
