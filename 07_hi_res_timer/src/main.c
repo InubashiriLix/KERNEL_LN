@@ -23,7 +23,7 @@ uint8_t led_pwm_state, increasing;
 #define GPIO_PWM_LED 135
 #define GPIO_LED_TEST 134
 #define TIMER_BREATH_HELPER_INTERVEL 50
-#define TIMER_BREATH_HELPRE_STEP 10
+#define TIMER_BREATH_HELPRE_STEP 5
 
 // hr timer
 static struct hrtimer pwm_timer, pwm_breath_timer;

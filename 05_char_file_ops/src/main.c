@@ -18,6 +18,7 @@ static int f_release(struct inode* mynode, struct file* filep) {
     printk(KERN_INFO "close the char file");
     return 0;
 }
+
 static struct file_operations fops = {.open = f_open, .release = f_release};
 
 static int __init my_init(void) {
