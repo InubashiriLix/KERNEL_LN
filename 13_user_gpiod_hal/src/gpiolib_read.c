@@ -1,16 +1,17 @@
 #include <gpiod.h>
 #include <stdio.h>
 
-#define GPIO_LINE 17
+#define GPIO_LINE 6
+#define GPIO_CHIP "/dev/gpiochip4"
 
 int main() {
     struct gpiod_chip *chip;
     struct gpiod_line *line;
     int value;
 
-    chip = gpiod_chip_open("/dev/gpiochip0");
+    chip = gpiod_chip_open(GPIO_CHIP);
     if (!chip) {
-        perror("Open gpio /dev/gpiochip0 failed");
+        perror("Open gpiochip failed");
         return -1;
     }
 
