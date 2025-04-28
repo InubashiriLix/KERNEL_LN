@@ -80,16 +80,25 @@ def create_clangd_config(module_name):
     clangd_content = """
 CompileFlags:
   Add:
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/include/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/include/asm-generic/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm/include/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm/include/asm/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/asm/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/arch/arm64/include/generated/asm/"
-    - "-I/usr/src/linux-headers-6.1.43-rockchip-rk3588/"
+    # —— 告诉 clangd 你是为 aarch64 内核模块编译的 ——
+    - --target=aarch64-linux-gnu
+    - -std=gnu17
+
     - "-D__KERNEL__"
     - "-DMODULE"
+
+    # —— 核心 include 路径 ——
+    - -isystem
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/include
+
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/include/uapi
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/include/generated
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/include/config
+
+    # —— 架构相关 include ——
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/arch/arm64/include
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/arch/arm64/include/generated
+    - /usr/src/linux-headers-5.10.160-rockchip-rk3588/arch/arm64/include/generated/uapi
 """
 
     with open(f"{module_name}/.clangd", "w") as f:

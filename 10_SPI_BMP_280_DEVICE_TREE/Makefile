@@ -1,16 +1,16 @@
 
 ifneq ($(KERNELRELEASE),)
-obj-m := 13_iocontrol.o
-13_iocontrol-objs := src/main.o
+obj-m := 10_SPI_BMP_280_DEVICE_TREE.o
+10_SPI_BMP_280_DEVICE_TREE-objs := src/main.o
 else
     KDIR := /lib/modules/$(shell uname -r)/build
     PWD := $(shell pwd)
     SRC_DIR := $(PWD)/src
     OBJ_DIR := $(PWD)/obj
-    MODULE := $(PWD)/13_iocontrol.ko
+    MODULE := $(PWD)/10_SPI_BMP_280_DEVICE_TREE.ko
 
 all:
-	@echo "Building 13_iocontrol module..."
+	@echo "Building 10_SPI_BMP_280_DEVICE_TREE module..."
 	mkdir -p $(OBJ_DIR)
 	make -C $(KDIR) M=$(PWD) modules
 
